@@ -3,11 +3,38 @@ const button_x = document.querySelector('.button_x');
 const button_y = document.querySelector('.button_y');
 let x = [];
 let y = [];
+let user;
+let pc;
+
+button_x.addEventListener('click', () => {
+    user = x;
+    pc = y;
+    console.log('pick x');
+});
+button_y.addEventListener('click', () => {
+    user = y;
+    pc = x;
+    console.log('pick y');
+});
 
 // get the data from click
 tics.forEach(tic => {
     tic.addEventListener('click', () => {
-        x.push(tic.value);
+        if (user === x) {
+            let randomNumber = `${Math.floor(Math.random() * (9 - 1 + 1)) + 1}`;
+            if (!x.includes(tic.value) && !y.includes(tic.value) && !y.includes(randomNumber) && !x.includes(randomNumber) ) {
+                x.push(tic.value);
+                y.push(randomNumber);
+                console.log('x ' + x);
+                console.log('y ' + y);
+            }
+        } else if(user === y) {
+            if (!y.includes(tic.value)) {
+                y.push(tic.value);
+            }
+        } else {
+            console.log('pick x or y');
+        }
         if (x.length >= 3 || y.length >= 3) {
             game_logic();
         }
@@ -23,6 +50,7 @@ function arrayHasValues(arr, values) {
 function reset() {
     x = [];
     y = [];
+    user;
 }
 
 // possible wining logic
@@ -44,6 +72,6 @@ function game_logic() {
         reset();
     } else {
         console.log('draw');
-        reset();
+        // reset();
     }
 };
