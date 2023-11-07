@@ -1,47 +1,108 @@
 const tics = document.querySelectorAll('.tic');
 const button_x = document.querySelector('.button_x');
-const button_y = document.querySelector('.button_y');
+const button_o = document.querySelector('.button_o');
 let x = [];
-let y = [];
-let user;
-let pc;
+let o = [];
+let user_1;
+let user_2;
+let turn;
 
 button_x.addEventListener('click', () => {
-    user = x;
-    pc = y;
+    user_1 = 'X';
+    user_2 = 'O';
+    turn = 'X';
     console.log('pick x');
 });
-button_y.addEventListener('click', () => {
-    user = y;
-    pc = x;
-    console.log('pick y');
+button_o.addEventListener('click', () => {
+    user_1 = 'O';
+    user_2 = 'X';
+    turn = 'O';
+    console.log('pick o');
 });
 
 // get the data from click
 tics.forEach(tic => {
     tic.addEventListener('click', () => {
-        if (user === x) {
-            let randomNumber = `${Math.floor(Math.random() * (9 - 1 + 1)) + 1}`;
-            if (!x.includes(tic.value) && !y.includes(tic.value) && !y.includes(randomNumber) && !x.includes(randomNumber) ) {
-                x.push(tic.value);
-                y.push(randomNumber);
-                console.log('x ' + x);
-                console.log('y ' + y);
+        if (user_1 === 'X') {
+            if (turn === 'X') {
+                if (!x.includes(tic.value) && !o.includes(tic.value)) {
+                    x.push(tic.value);
+                    tic.classList.add('playerX');
+                    turn = 'O';
+                    game_logic();
+                }
+            } else {
+                if (!x.includes(tic.value) && !o.includes(tic.value)) {
+                    o.push(tic.value);
+                    tic.classList.add('playerO');
+                    turn = 'X';
+                    game_logic();
+                }
             }
-        } else if(user === y) {
-            if (!y.includes(tic.value)) {
-                y.push(tic.value);
+            console.log('x ' + x);
+            console.log('o ' + o);
+        } else if (user_1 === 'O') {
+            if (turn === 'X') {
+                if (!x.includes(tic.value) && !o.includes(tic.value)) {
+                    x.push(tic.value);
+                    tic.classList.add('playerX');
+                    turn = 'O';
+                    game_logic();
+                }
+            } else {
+                if (!x.includes(tic.value) && !o.includes(tic.value)) {
+                    o.push(tic.value);
+                    tic.classList.add('playerO');
+                    turn = 'X';
+                    game_logic();
+                }
             }
+            console.log('x ' + x);
+            console.log('o ' + o);
         } else {
-            console.log('pick x or y');
-        }
-        if (x.length >= 3 || y.length >= 3) {
-            game_logic();
+            console.log('need to select one');
         }
     });
 });
+// tics.forEach(tic => {
+//     tic.addEventListener('click', () => {
+//         let randomNumber = `${Math.floor(Math.random() * (9 - 1 + 1)) + 1}`;
+//         if (user === 'X') {
+//             if (!x.includes(tic.value) && !o.includes(tic.value ) && !o.includes(randomNumber) && !x.includes(randomNumber)) {
+//                 console.log(x);
+//                 console.log(o);
+//                 x.push(tic.value);
+//                 // tic.classList.add('playerX');
+//                 o.push(randomNumber);
+//                 // tics.forEach(tic => {
+//                 //     if (tic.value === randomNumber) {
+//                 //         tic.classList.add('playerO');
+//                 //     }
+//                 // })
+//                 console.log('x ' + x);
+//                 console.log('o ' + o);
+//             } else {
+//                 console.log('value include');
+//             }
+//         } else if(user === '0') {
+//             if (!x.includes(tic.value) && !o.includes(tic.value) && !o.includes(randomNumber) && !x.includes(randomNumber)) {
+//                 o.push(tic.value);
+//                 tic.classList.add('playerO');
+//                 x.push(randomNumber);
+//                 console.log('x ' + x);
+//                 console.log('o ' + o);
+//             }
+//         } else {
+//             console.log('pick x or o');
+//         }
+//         // if (x.length >= 3 || o.length >= 3) {
+//         //     game_logic();
+//         // }
+//     });
+// });
 
 // array value check
+
 function arrayHasValues(arr, values) {
     return values.every(value => arr.includes(value));
 }
@@ -49,8 +110,13 @@ function arrayHasValues(arr, values) {
 // reset the values
 function reset() {
     x = [];
-    y = [];
-    user;
+    o = [];
+    user_1;
+    user_2;
+    // tics.forEach(tic => {
+    //     tic.classList.remove('playerX');
+    //     tic.classList.remove('playerO');
+    // })
 }
 
 // possible wining logic
@@ -67,8 +133,8 @@ function game_logic() {
         console.log('x win');
         console.log(x);
         reset();
-    } else if (arrayHasValues(y, possible_1) || arrayHasValues(y, possible_2) || arrayHasValues(y, possible_3) || arrayHasValues(y, possible_4) || arrayHasValues(y, possible_5) || arrayHasValues(y, possible_6) || arrayHasValues(y, possible_7) || arrayHasValues(y, possible_8)) {
-        console.log('y win');
+    } else if (arrayHasValues(o, possible_1) || arrayHasValues(o, possible_2) || arrayHasValues(o, possible_3) || arrayHasValues(o, possible_4) || arrayHasValues(o, possible_5) || arrayHasValues(o, possible_6) || arrayHasValues(o, possible_7) || arrayHasValues(o, possible_8)) {
+        console.log('o win');
         reset();
     } else {
         console.log('draw');
