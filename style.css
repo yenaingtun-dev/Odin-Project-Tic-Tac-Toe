@@ -12,6 +12,15 @@ body {
     text-align: center;
 }
 
+.button_start {
+    background-color: bisque;
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
 .board {
     margin: 0 auto;
     display: grid;
@@ -41,13 +50,21 @@ body {
 }
 
 .controls button {
-    color: white;
+    /* color: white; */
     padding: 8px;
     border-radius: 8px;
     border: none;
     font-size: 20px;
     margin-left: 1em;
     cursor: pointer;
+}
+
+.button_x {
+    background-color: #09C372;
+}
+
+.button_o {
+    background-color: #498AFB;
 }
 
 .playerX {
