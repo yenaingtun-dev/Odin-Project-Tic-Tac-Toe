@@ -60,7 +60,7 @@ tics.forEach(tic => {
             console.log('x ' + x);
             console.log('o ' + o);
         } else {
-            console.log('need to select one');
+            alert('need to select X or O');
         }
     });
 });
@@ -111,12 +111,12 @@ function arrayHasValues(arr, values) {
 function reset() {
     x = [];
     o = [];
-    user_1;
-    user_2;
-    // tics.forEach(tic => {
-    //     tic.classList.remove('playerX');
-    //     tic.classList.remove('playerO');
-    // })
+    user_1 = '';
+    user_2 = '';
+    tics.forEach(tic => {
+        tic.classList.remove('playerX');
+        tic.classList.remove('playerO');
+    })
 }
 
 // possible wining logic
@@ -130,11 +130,10 @@ function game_logic() {
     const possible_7 = ['1', '5', '9'];
     const possible_8 = ['3', '5', '7'];
     if (arrayHasValues(x, possible_1) || arrayHasValues(x, possible_2) || arrayHasValues(x, possible_3) || arrayHasValues(x, possible_4) || arrayHasValues(x, possible_5) || arrayHasValues(x, possible_6) || arrayHasValues(x, possible_7) || arrayHasValues(x, possible_8)) {
-        console.log('x win');
-        console.log(x);
+        alert('X win')
         reset();
     } else if (arrayHasValues(o, possible_1) || arrayHasValues(o, possible_2) || arrayHasValues(o, possible_3) || arrayHasValues(o, possible_4) || arrayHasValues(o, possible_5) || arrayHasValues(o, possible_6) || arrayHasValues(o, possible_7) || arrayHasValues(o, possible_8)) {
-        console.log('o win');
+        alert('O win')
         reset();
     } else {
         console.log('draw');
