@@ -18,12 +18,18 @@ button_x.addEventListener('click', () => {
     user_1 = 'X';
     user_2 = 'O';
     turn = 'X';
+    button_restart.classList.remove('hide');
+    button_x.classList.add('hide');
+    button_o.classList.add('hide');
     console.log('pick x');
 });
 button_o.addEventListener('click', () => {
     user_1 = 'O';
     user_2 = 'X';
     turn = 'O';
+    button_restart.classList.remove('hide');
+    button_x.classList.add('hide');
+    button_o.classList.add('hide');
     console.log('pick o');
 });
 
@@ -164,10 +170,12 @@ function game_logic() {
         button_o.classList.add('hide');
         alert('O win');
     } else {
-        button_restart.classList.remove('hide');
-        button_x.classList.add('hide');
-        button_o.classList.add('hide');
-        // result = 'D';
-        // alert('Draw');
+        if (x.length >= 5 || o.length >= 5) {
+            button_restart.classList.remove('hide');
+            button_x.classList.add('hide');
+            button_o.classList.add('hide');
+            result = 'D';
+            alert('Draw');
+        }
     }
 };
