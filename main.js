@@ -42,6 +42,7 @@ tics.forEach(tic => {
                     if (!x.includes(tic.value) && !o.includes(tic.value)) {
                         x.push(tic.value);
                         tic.classList.add('playerX');
+                        tic.append('X');
                         turn = 'O';
                         game_logic();
                     }
@@ -49,6 +50,7 @@ tics.forEach(tic => {
                     if (!x.includes(tic.value) && !o.includes(tic.value)) {
                         o.push(tic.value);
                         tic.classList.add('playerO');
+                        tic.append('O');
                         turn = 'X';
                         game_logic();
                     }
@@ -60,6 +62,7 @@ tics.forEach(tic => {
                     if (!x.includes(tic.value) && !o.includes(tic.value)) {
                         x.push(tic.value);
                         tic.classList.add('playerX');
+                        tic.append('X');
                         turn = 'O';
                         game_logic();
                     }
@@ -67,6 +70,7 @@ tics.forEach(tic => {
                     if (!x.includes(tic.value) && !o.includes(tic.value)) {
                         o.push(tic.value);
                         tic.classList.add('playerO');
+                        tic.append('O');
                         turn = 'X';
                         game_logic();
                     }
@@ -143,6 +147,7 @@ function reset() {
     tics.forEach(tic => {
         tic.classList.remove('playerX');
         tic.classList.remove('playerO');
+        tic.innerHTML = '';
     });
     result = '';
 }
